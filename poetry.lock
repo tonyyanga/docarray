@@ -5089,6 +5089,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 audio = ["pydub"]
 aws = ["smart-open"]
 elasticsearch = ["elastic-transport", "elasticsearch"]
+epsilla = ["pyepsilla"]
 full = ["av", "jax", "lz4", "pandas", "pillow", "protobuf", "pydub", "trimesh", "types-pillow"]
 hnswlib = ["hnswlib", "protobuf"]
 image = ["pillow", "types-pillow"]
@@ -5108,4 +5109,4 @@ web = ["fastapi"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<4.0"
-content-hash = "f4873282e6ebbbdc6d3c3fce5334a4ccbbc08a534f612d4e96210ffd0bd318d2"
+content-hash = "e989e47e7947e3b15238342937e2f5132437ffeff2a011d612f8ff7ed38fd930"
