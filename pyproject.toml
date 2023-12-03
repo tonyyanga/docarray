@@ -81,6 +81,7 @@ weaviate = ["weaviate-client"]
 milvus = ["pymilvus"]
 redis = ['redis']
 jax = ["jaxlib","jax"]
+epsilla = ["pyepsilla"]
 
 # all
 full = ["protobuf", "lz4", "pandas", "pillow", "types-pillow", "av", "pydub", "trimesh", "jax"]
