@@ -15,7 +15,10 @@
 > **Note**
 > The README you're currently viewing is for DocArray>0.30, which introduces some significant changes from DocArray 0.21. If you wish to continue using the older DocArray <=0.21, ensure you install it via `pip install docarray==0.21`. Refer to its [codebase](https://github.com/docarray/docarray/tree/v0.21.0), [documentation](https://docarray.jina.ai), and [its hot-fixes branch](https://github.com/docarray/docarray/tree/docarray-v1-fixes) for more information.
 
+
 DocArray is a Python library expertly crafted for the [representation](#represent), [transmission](#send), [storage](#store), and [retrieval](#retrieve) of multimodal data. Tailored for the development of multimodal AI applications, its design guarantees seamless integration with the extensive Python and machine learning ecosystems. As of January 2022, DocArray is openly distributed under the [Apache License 2.0](https://github.com/docarray/docarray/blob/main/LICENSE) and currently enjoys the status of a sandbox project within the [LF AI & Data Foundation](https://lfaidata.foundation/).
+
+
 
 - :fire: Offers native support for **[NumPy](https://github.com/numpy/numpy)**, **[PyTorch](https://github.com/pytorch/pytorch)**, **[TensorFlow](https://github.com/tensorflow/tensorflow)**, and **[JAX](https://github.com/google/jax)**, catering specifically to **model training scenarios**.
 - :zap: Based on **[Pydantic](https://github.com/pydantic/pydantic)**, and instantly compatible with web and microservice frameworks like **[FastAPI](https://github.com/tiangolo/fastapi/)** and **[Jina](https://github.com/jina-ai/jina/)**.
@@ -34,15 +37,15 @@ pip install -U docarray
 > To use DocArray <=0.21, make sure you install via `pip install docarray==0.21` and check out its [codebase](https://github.com/docarray/docarray/tree/v0.21.0) and [docs](https://docarray.jina.ai) and [its hot-fixes branch](https://github.com/docarray/docarray/tree/docarray-v1-fixes).
 
 ## Get Started
-
 New to DocArray? Depending on your use case and background, there are multiple ways to learn about DocArray:
-
+ 
 - [Coming from pure PyTorch or TensorFlow](#coming-from-pytorch)
 - [Coming from Pydantic](#coming-from-pydantic)
 - [Coming from FastAPI](#coming-from-fastapi)
 - [Coming from Jina](#coming-from-jina)
 - [Coming from a vector database](#coming-from-a-vector-database)
 - [Coming from Langchain](#coming-from-langchain)
+
 
 ## Represent
 
@@ -59,6 +62,7 @@ This is particularly beneficial for various scenarios:
 > Furthermore, we have a [specific section](#coming-from-pydantic) dedicated to your needs!
 
 In essence, DocArray facilitates data representation in a way that mirrors Python dataclasses, with machine learning being an integral component:
+
 
 ```python
 from docarray import BaseDoc
@@ -187,7 +191,7 @@ vec = DocVec[Image](  # the DocVec is parametrized by your personal schema!
         for _ in range(100)
     ]
 )
-```
+``` 
 
 In the code snippet above, `DocVec` is **parametrized by the type of document** you want to use with it: `DocVec[Image]`.
 
@@ -276,6 +280,7 @@ This feature proves beneficial for several scenarios:
 
 When it comes to data transmission, serialization is a crucial step. Let's delve into how DocArray streamlines this process:
 
+
 ```python
 from docarray import BaseDoc
 from docarray.typing import ImageTorchTensor
@@ -345,7 +350,7 @@ This is useful for:
 - :mag: **Neural search** applications
 - :bulb: **Recommender systems**
 
-Currently, Document Indexes support **[Weaviate](https://weaviate.io/)**, **[Qdrant](https://qdrant.tech/)**, **[ElasticSearch](https://www.elastic.co/)**, **[Redis](https://redis.io/)**, and **[HNSWLib](https://github.com/nmslib/hnswlib)**, with more to come!
+Currently, Document Indexes support **[Weaviate](https://weaviate.io/)**, **[Qdrant](https://qdrant.tech/)**, **[ElasticSearch](https://www.elastic.co/)**,  **[Redis](https://redis.io/)**, and **[HNSWLib](https://github.com/nmslib/hnswlib)**, with more to come!
 
 The Document Index interface lets you index and retrieve Documents from multiple vector databases, all with the same user interface.
 
@@ -406,7 +411,6 @@ _DocArray >=0.30 is that idea, taken seriously._ Every document is created throu
 courtesy of [Pydantic](https://pydantic-docs.helpmanual.io/usage/models/).
 
 This gives the following advantages:
-
 - **Flexibility:** No need to conform to a fixed set of fields -- your data defines the schema
 - **Multimodality:** At their core, documents are just dictionaries. This makes it easy to create and send them from any language, not just Python.
 
@@ -417,7 +421,7 @@ They are now called **Document Indexes** and offer the following improvements (s
 - **Production-ready:** The new Document Indexes are a much thinner wrapper around the various vector DB libraries, making them more robust and easier to maintain
 - **Increased flexibility:** We strive to support any configuration or setting that you could perform through the DB's first-party client
 
-For now, Document Indexes support **[Weaviate](https://weaviate.io/)**, **[Qdrant](https://qdrant.tech/)**, **[ElasticSearch](https://www.elastic.co/)**, **[Redis](https://redis.io/)**, Exact Nearest Neighbour search and **[HNSWLib](https://github.com/nmslib/hnswlib)**, with more to come.
+For now, Document Indexes support **[Weaviate](https://weaviate.io/)**, **[Qdrant](https://qdrant.tech/)**, **[ElasticSearch](https://www.elastic.co/)**, **[Redis](https://redis.io/)**,  Exact Nearest Neighbour search and **[HNSWLib](https://github.com/nmslib/hnswlib)**, with more to come.
 
 </details>
 
@@ -608,6 +612,7 @@ schema definition (see [below](#coming-from-fastapi)). Everything is handled in 
 
 </details>
 
+
 ### Coming from TensorFlow
 
 <details markdown="1">
@@ -623,7 +628,7 @@ pip install protobuf==3.19.0
 ```
 
 Compared to using DocArray with PyTorch, there is one main difference when using it with TensorFlow:
-While DocArray's `TorchTensor` is a subclass of `torch.Tensor`, this is not the case for the `TensorFlowTensor`: Due to some technical limitations of `tf.Tensor`, DocArray's `TensorFlowTensor` is not a subclass of `tf.Tensor` but rather stores a `tf.Tensor` in its `.tensor` attribute.
+While DocArray's `TorchTensor` is a subclass of `torch.Tensor`, this is not the case for the `TensorFlowTensor`: Due to some technical limitations of `tf.Tensor`, DocArray's `TensorFlowTensor` is not a subclass of `tf.Tensor` but rather stores a `tf.Tensor` in its `.tensor` attribute. 
 
 How does this affect you? Whenever you want to access the tensor data to, let's say, do operations with it or hand it to your ML model, instead of handing over your `TensorFlowTensor` instance, you need to access its `.tensor` attribute.
 
@@ -727,7 +732,7 @@ Just like a vanilla Pydantic model!
 Jina has adopted docarray as their library for representing and serializing Documents.
 
 Jina allows to serve models and services that are built with DocArray allowing you to serve and scale these applications
-making full use of DocArray's serialization capabilites.
+making full use of DocArray's serialization capabilites. 
 
 ```python
 import numpy as np
@@ -846,30 +851,28 @@ Of course this is only one of the things that DocArray can do, so we encourage y
 
 </details>
 
+
 ### Coming from Langchain
 
 <details markdown="1">
   <summary>Click to expand</summary>
 
-With DocArray, you can connect external data to LLMs through Langchain. DocArray gives you the freedom to establish
+With DocArray, you can connect external data to LLMs through Langchain. DocArray gives you the freedom to establish 
 flexible document schemas and choose from different backends for document storage.
 After creating your document index, you can connect it to your Langchain app using [DocArrayRetriever](https://python.langchain.com/docs/modules/data_connection/retrievers/integrations/docarray_retriever).
 
 Install Langchain via:
-
 ```shell
 pip install langchain
 ```
 
 1. Define a schema and create documents:
-
 ```python
 from docarray import BaseDoc, DocList
 from docarray.typing import NdArray
 from langchain.embeddings.openai import OpenAIEmbeddings
 
 embeddings = OpenAIEmbeddings()
-
 
 # Define a document schema
 class MovieDoc(BaseDoc):
@@ -892,10 +895,8 @@ docs = DocList[MovieDoc](
 ```
 
 2. Initialize a document index using any supported backend:
-
 ```python
 from docarray.index import (
-    EpsillaDocumentIndex,
     InMemoryExactNNIndex,
     HnswDocumentIndex,
     WeaviateDocumentIndex,
@@ -909,7 +910,6 @@ db = InMemoryExactNNIndex[MovieDoc](docs)
 ```
 
 3. Finally, initialize a retriever and integrate it into your chain!
-
 ```python
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationalRetrievalChain
@@ -929,10 +929,11 @@ model = ChatOpenAI()
 qa = ConversationalRetrievalChain.from_llm(model, retriever=retriever)
 ```
 
-Alternatively, you can use built-in vector stores. Langchain supports two vector stores: [DocArrayInMemorySearch](https://python.langchain.com/docs/modules/data_connection/vectorstores/integrations/docarray_in_memory) and [DocArrayHnswSearch](https://python.langchain.com/docs/modules/data_connection/vectorstores/integrations/docarray_hnsw).
+Alternatively, you can use built-in vector stores. Langchain supports two vector stores: [DocArrayInMemorySearch](https://python.langchain.com/docs/modules/data_connection/vectorstores/integrations/docarray_in_memory) and [DocArrayHnswSearch](https://python.langchain.com/docs/modules/data_connection/vectorstores/integrations/docarray_hnsw). 
 Both are user-friendly and are best suited to small to medium-sized datasets.
 
 </details>
+
 
 ## See also
 
@@ -943,3 +944,4 @@ Both are user-friendly and are best suited to small to medium-sized datasets.
 - [Roadmap](https://github.com/docarray/docarray/issues/1714)
 
 > DocArray is a trademark of LF AI Projects, LLC
+> 
