@@ -5,7 +5,8 @@ from pydantic import Field
 from docarray import BaseDoc
 from docarray.index import EpsillaDocumentIndex
 from docarray.typing import NdArray
-from tests.index.epsilla.fixtures import epsilla_config, start_storage  # noqa: F401
+from tests.index.epsilla.common import epsilla_config, index_len
+from tests.index.epsilla.fixtures import start_storage  # noqa: F401
 
 pytestmark = [pytest.mark.slow, pytest.mark.index]
 
@@ -22,15 +23,15 @@ def test_persist(tmp_index_name):
 
     index_name = index.index_name
 
-    assert len(index.filter("")) == 0
+    assert index_len(index) == 0
 
     index.index([SimpleDoc(tens=np.random.random((10,))) for _ in range(10)])
-    assert len(index.filter("")) == 10
+    assert index_len(index) == 10
     find_results_before = index.find(query, limit=5, search_field="tens")
 
     # load existing index
     index = EpsillaDocumentIndex[SimpleDoc](**epsilla_config, table_name=index_name)
-    assert len(index.filter("")) == 10
+    assert index_len(index) == 10
     find_results_after = index.find(query, limit=5, search_field="tens")
     for doc_before, doc_after in zip(find_results_before[0], find_results_after[0]):
         assert doc_before.id == doc_after.id
@@ -38,4 +39,4 @@ def test_persist(tmp_index_name):
 
     # add new data
     index.index([SimpleDoc(tens=np.random.random((10,))) for _ in range(5)])
-    assert len(index.filter("")) == 15
+    assert index_len(index) == 15

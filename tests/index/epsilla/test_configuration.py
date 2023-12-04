@@ -5,7 +5,8 @@ from pydantic import Field
 from docarray import BaseDoc
 from docarray.index import EpsillaDocumentIndex
 from docarray.typing import NdArray
-from tests.index.epsilla.fixtures import epsilla_config, start_storage  # noqa: F401
+from tests.index.epsilla.common import epsilla_config
+from tests.index.epsilla.fixtures import start_storage  # noqa: F401
 
 pytestmark = [pytest.mark.slow, pytest.mark.index]
 

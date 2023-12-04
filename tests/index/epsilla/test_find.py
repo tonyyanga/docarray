@@ -5,7 +5,8 @@ from pydantic import Field
 from docarray import BaseDoc, DocList
 from docarray.index import EpsillaDocumentIndex
 from docarray.typing import NdArray, TorchTensor
-from tests.index.epsilla.fixtures import epsilla_config, start_storage  # noqa: F401
+from tests.index.epsilla.common import epsilla_config
+from tests.index.epsilla.fixtures import start_storage  # noqa: F401
 
 pytestmark = [pytest.mark.slow, pytest.mark.index]
 
@@ -272,7 +273,7 @@ def test_filter_range(tmp_index_name):  # noqa: F811
 
     assert len(docs) == 1
 
-    docs = index.filter(f"id = '{index_docs[0].id}'")
+    docs = index.filter(f"id = '{index_docs[0].id}'", limit=5)
     assert docs[0].id == index_docs[0].id
 
 

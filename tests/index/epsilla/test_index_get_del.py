@@ -6,7 +6,8 @@ from pydantic import Field
 from docarray import BaseDoc, DocList
 from docarray.index import EpsillaDocumentIndex
 from docarray.typing import NdArray, TorchTensor
-from tests.index.epsilla.fixtures import epsilla_config, start_storage  # noqa: F401
+from tests.index.epsilla.common import epsilla_config, index_len
+from tests.index.epsilla.fixtures import start_storage  # noqa: F401
 
 pytestmark = [pytest.mark.slow, pytest.mark.index]
 
@@ -59,7 +60,7 @@ def test_index_simple_schema(
         ten_simple_docs = DocList[SimpleDoc](ten_simple_docs)
 
     index.index(ten_simple_docs)
-    assert len(index.filter("")) == 10
+    assert index_len(index) == 10
 
 
 @pytest.mark.parametrize('use_docarray', [True, False])
@@ -69,7 +70,7 @@ def test_index_flat_schema(ten_flat_docs, use_docarray, tmp_index_name):  # noqa
         ten_flat_docs = DocList[FlatDoc](ten_flat_docs)
 
     index.index(ten_flat_docs)
-    assert len(index.filter("")) == 10
+    assert index_len(index) == 10
 
 
 def test_index_torch(tmp_index_name):
@@ -80,16 +81,16 @@ def test_index_torch(tmp_index_name):
     index = EpsillaDocumentIndex[TorchDoc](**epsilla_config, table_name=tmp_index_name)
 
     index.index(docs)
-    assert len(index.filter("")) == 10
+    assert index_len(index) == 10
 
 
 def test_del_single(ten_simple_docs, tmp_index_name):  # noqa: F811
     index = EpsillaDocumentIndex[SimpleDoc](**epsilla_config, table_name=tmp_index_name)
     index.index(ten_simple_docs)
     # delete once
-    assert len(index.filter("")) == 10
+    assert index_len(index) == 10
     del index[ten_simple_docs[0].id]
-    assert len(index.filter("")) == 9
+    assert index_len(index) == 9
     for i, d in enumerate(ten_simple_docs):
         id_ = d.id
         if i == 0:  # deleted
@@ -99,7 +100,7 @@ def test_del_single(ten_simple_docs, tmp_index_name):  # noqa: F811
             assert index[id_].id == id_
     # delete again
     del index[ten_simple_docs[3].id]
-    assert len(index.filter("")) == 8
+    assert index_len(index) == 8
     for i, d in enumerate(ten_simple_docs):
         id_ = d.id
         if i in (0, 3):  # deleted
@@ -115,7 +116,7 @@ def test_del_multiple(ten_simple_docs, tmp_index_name):
     index = EpsillaDocumentIndex[SimpleDoc](**epsilla_config, table_name=tmp_index_name)
     index.index(ten_simple_docs)
 
-    assert len(index.filter("")) == 10
+    assert index_len(index) == 10
     docs_to_del = [ten_simple_docs[i] for i in docs_to_del_idx]
     ids_to_del = [d.id for d in docs_to_del]
     del index[ids_to_del]
@@ -131,17 +132,17 @@ def test_num_docs(ten_simple_docs, tmp_index_name):  # noqa: F811
     index = EpsillaDocumentIndex[SimpleDoc](**epsilla_config, table_name=tmp_index_name)
     index.index(ten_simple_docs)
 
-    assert len(index.filter("")) == 10
+    assert index_len(index) == 10
 
     del index[ten_simple_docs[0].id]
-    assert len(index.filter("")) == 9
+    assert index_len(index) == 9
 
     del index[ten_simple_docs[3].id, ten_simple_docs[5].id]
-    assert len(index.filter("")) == 7
+    assert index_len(index) == 7
 
     more_docs = [SimpleDoc(tens=np.random.rand(10)) for _ in range(5)]
     index.index(more_docs)
-    assert len(index.filter("")) == 12
+    assert index_len(index) == 12
 
     del index[more_docs[2].id, ten_simple_docs[7].id]  # type: ignore[arg-type]
-    assert len(index.filter("")) == 10
+    assert index_len(index) == 10
