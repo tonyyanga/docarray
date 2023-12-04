@@ -3335,13 +3335,13 @@ files = [
 
 [[package]]
 name = "pyepsilla"
-version = "0.2.2"
+version = "0.2.3"
 description = "Epsilla Python SDK"
 optional = true
 python-versions = "*"
 files = [
-    {file = "pyepsilla-0.2.2-py3-none-any.whl", hash = "sha256:27ee9b61410cd886077fd6b6930459c49bcb3b2d7e33a715b5fd4526f28a6462"},
-    {file = "pyepsilla-0.2.2.tar.gz", hash = "sha256:b328688c16f32a46d543cd465164db16e8041b4653a1475a44931b30cceed482"},
+    {file = "pyepsilla-0.2.3-py3-none-any.whl", hash = "sha256:05bf5f95dc1bd0dfdacac84b844d1505d8aeac442e0c0eadc834ce3ab75ab845"},
+    {file = "pyepsilla-0.2.3.tar.gz", hash = "sha256:ce302ad965d428dbb22acb574f51046bfa8456204ead7f874ebd63bb5bc820a0"},
 ]
 
 [package.dependencies]
@@ -5109,4 +5109,4 @@ web = ["fastapi"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<4.0"
-content-hash = "e989e47e7947e3b15238342937e2f5132437ffeff2a011d612f8ff7ed38fd930"
+content-hash = "469714891dd7e3e6ddb406402602f0b1bb09215bfbd3fd8d237a061a0f6b3167"
